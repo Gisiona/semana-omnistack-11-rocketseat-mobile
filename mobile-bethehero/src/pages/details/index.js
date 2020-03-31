@@ -12,11 +12,11 @@ import * as MailComposer from 'expo-mail-composer'
 function Details() {
 
     const navigation = useNavigation();
-    const message = "Olá APAE, estou entrando em contato pois gostaria de ajudar no caso da cadelinha atropelada.";
-
     const route = useRoute();
 
     const incident = route.params.incident;
+    const valorFormatado = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format( incident.value );
+    const message = `Olá ${incident.title}, estou entrando em contato pois gostaria de ajudar no caso ajudando com o valor ${valorFormatado}`;
     
     function navigationToBack(){
         navigation.goBack();
@@ -24,14 +24,14 @@ function Details() {
 
     function sendEmail(){
         MailComposer.composeAsync({
-            subject: 'Herói do caso: Cadelinha atropelada.',
-            recipients: ['gil-real@hotmail.com'],
+            subject: `Herói do caso: ${incident.title}`,
+            recipients: [`${incident.email}`,'gil-real@hotmail.com'],
             body: message,
         });
     }
 
     function sendWhatsapp(){
-        Linking.openURL(`whatsapp://send?phone=${incident.whatsapp}&text=${message}`);
+        Linking.openURL(`whatsapp://send?phone=${"55" + incident.whatsapp}&text=${message}`);
     }
 
     return (

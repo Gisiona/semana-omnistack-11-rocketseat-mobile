@@ -16,13 +16,14 @@ function Incidents() {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
-    async function loadIncidents() {
-        
+    async function loadIncidents() {        
         if(loading){
+            console.log('Loading já em execução.');
             return;
         }
 
         if(total > 0 && incidents.length == total ){
+            console.log('Loading já está na última pagina.');
             return;
         }
 
@@ -32,18 +33,17 @@ function Incidents() {
             params: { page }
         });  
 
+        console.log(response.data);
         // forma de setar mais atualizar um estado do objeto e não atualizar o mesmo
-        //setIncidents(... incidents.data[0], ... response.data[1]);
+        setIncidents([... incidents, ... response.data]);
     
-        setIncidents(response.data);
+        setPage(page + 1);
+        console.log('Pagina: ' + page);
         
         setTotal(response.headers['x-total-count']);
         console.log("Total de Registro: " + response.headers['x-total-count']);
 
-        setPage(page + 1);
-        setLoading(false);
-
-        console.log(response.data);
+        setLoading(false);        
     }
 
     useEffect(() => {
@@ -72,7 +72,7 @@ function Incidents() {
                 keyExtractor={ incident => String(incident.id) }
                 showsVerticalScrollIndicator={false}
                 onEndReached={loadIncidents}
-                onEndReachedThreshold={0.1}
+                onEndReachedThreshold={0.2 } // 20%
                 renderItem={ ({ item: incident }) => (
                     <View style={ styles.incident }>
                         <Text style={styles.incidentProperty }> Ong: </Text>
