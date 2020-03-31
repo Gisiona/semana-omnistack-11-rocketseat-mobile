@@ -28,25 +28,19 @@ function Incidents() {
 
         setLoading(true);
 
-        const response = await (await api.get('incidents', {
+        const response = await api.get('incidents', {
             params: { page }
-        })).data;  
-
-        console.log(response);
+        });  
 
         // forma de setar mais atualizar um estado do objeto e não atualizar o mesmo
         //setIncidents(... incidents.data[0], ... response.data[1]);
-        const dadosApi = response.data[0];
+    
+        setIncidents(response.data);
+        
+        setTotal(response.headers['x-total-count']);
+        console.log("Total de Registro: " + response.headers['x-total-count']);
 
-        setIncidents(dadosApi);
-
-
-        // setPage(incidents.length + 1);
-
-        console.log(response.data[0]);
-
-        setTotal(incidents.length);
-        setPage(total + 1);
+        setPage(page + 1);
         setLoading(false);
 
         console.log(response.data);
@@ -73,7 +67,7 @@ function Incidents() {
             <Text style={styles.description }>  Escolha um dos casos abaixo e salve o dia </Text>
 
             <FlatList 
-                data={ [ incidents ]}
+                data={incidents}
                 style={ styles.incidentList }
                 keyExtractor={ incident => String(incident.id) }
                 showsVerticalScrollIndicator={false}

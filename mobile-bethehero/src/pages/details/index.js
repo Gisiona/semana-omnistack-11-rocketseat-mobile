@@ -45,8 +45,8 @@ function Details() {
             </View>
 
             <View style={ styles.incident }>
-                <Text style={styles.incidentProperty , {marginTop: 0 } }> Ong: </Text>
-                <Text style={styles.incidentValue }> { incident.title } </Text>
+                <Text style={styles.incidentProperty , { marginTop: 0 } }> Ong: </Text>
+                <Text style={styles.incidentValue }> { incident.title } de { incident.city}/{incident.uf} </Text>
 
                 <Text style={styles.incidentProperty }> Caso: </Text>
                 <Text style={styles.incidentValue }> { incident.description } </Text>
