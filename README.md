@@ -2,7 +2,7 @@
 Código da aplicação mobile desenvolvido durante a Semana OmniStack 11 - BeTheHero
 
 <h1 align="center">
-    <img alt="Tela Inicial do app BeTheHero" src="https://i.pinimg.com/originals/fc/a3/3d/fca33d9d19606c332b9c25d67dbe413c.png.png" />
+    <img alt="Tela Inicial do app BeTheHero" src="https://i.pinimg.com/originals/fc/a3/3d/fca33d9d19606c332b9c25d67dbe413c.png" />
 </h1>
 
 # Libs utilizadas
